@@ -1,0 +1,149 @@
+
+section[role=main] {
+    width: 1000px;
+    margin: auto;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('/assets/images/blob-shape-1-bckg.svg');
+    background-repeat: no-repeat;
+    background-size: 150%;
+    background-position: center center;
+    text-align: center;
+
+}
+
+h1 {
+    color: #2ECC71;
+    font-family: 'Manrope bold', sans-serif;
+    font-size: 6rem;
+    text-align: center;
+    margin: 0;
+    padding: 1rem 0;
+}
+
+.restartsession {
+    background: #2ECC71;
+    border: none;
+    padding: .5rem 2rem;
+    position: relative;
+    top: .8rem;
+    z-index: 10;
+    font-family: 'Manrope semibold', sans-serif;
+    font-size: 1rem;
+    border-radius: .5rem;
+    margin: auto;
+    color: white;
+    box-shadow: 0 0 0.2rem 0.1rem rgba(0,0,0,0.09);
+}
+
+.uploadfilecontainer {
+    height: 12rem;
+    border: .2rem dashed rgba(112,112,112,0.31);
+    box-shadow: 0 0 0 15px white, 0 0 32px 30px rgba(0,0,0,0.09);
+    border-radius: 1rem;
+    background: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2ECC71;
+    font-family: 'Manrope semibold', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+section[role=main] ul, section[role=main] li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+section[role=main] ul {
+    margin: 2rem 0;
+}
+
+section[role=main] li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Manrope Bold', sans-serif;
+    margin: .8rem 0;
+
+    h4 {
+        margin: 0;
+        font-size: 1.3rem;
+    }
+
+    p {
+        font-family: 'Manrope Regular', sans-serif;
+        margin: 0;
+    }
+
+    & > div:first-child {
+        background-size: contain;
+        width: 7rem;
+        height: 7rem;
+        line-height: 7rem;
+        font-size: 3rem;
+        color: white;
+        margin-right: .8rem;
+    }
+    
+    &:first-child > div:first-child {
+        background-image: url('/assets/images/blob-shape-1.svg');
+    }
+    
+    &:nth-child(2) > div:first-child {
+        background-image: url('/assets/images/blob-shape-2.svg');
+    }
+
+    &:nth-child(3) > div:first-child {
+        background-image: url('/assets/images/blob-shape-3.svg'); 
+    }
+
+    & > div:nth-child(2) {
+        text-align: left;
+    }
+    
+    & > div:nth-child(2) h4 {
+        font-family: 'Manrope Bold', sans-serif;
+    }
+}
+
+footer {
+    background: white;
+    min-height: 20vh;
+    text-align: center;
+    font-family: 'Manrope ', sans-serif;
+
+    ul {
+        width: 1000px;
+        margin: auto;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(112,112,112,0.31); 
+        text-align: left;
+        padding: 2rem 0;
+    }
+
+    ul h5 {
+        font-family: 'Manrope Bold', sans-serif;
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul p {
+        font-family: 'Manrope Regular', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    p {
+        font-family: 'Manrope Bold', sans-serif;
+    }
+}

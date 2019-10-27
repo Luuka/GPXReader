@@ -1,0 +1,58 @@
+<section role="main">
+    <h1>Track Reader</h1>
+    <button class="restartsession">Restart your last session</button>
+    <div class="uploadfilecontainer" (click)="fileInput.click()" (dragover)="disablebehavior($event)" (dragleave)="disablebehavior($event)" appDragDrop (drop)="uploadFile($event)">
+      <p>Drop a gpx file here</p>  
+      <input hidden type="file" #fileInput (change)="uploadFileFromInput($event.target.files)">
+    </div>
+  
+    <ul>
+      <li>
+        <div>
+          1
+        </div>
+        <div>
+          <h4>Import a gpx file</h4>
+          <p>Import an existing gpx file</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          2
+        </div>
+        <div>
+          <h4>Edit your tracks & waypoints</h4>
+          <p>Use the editor for watch & edit the data</p>
+        </div>
+      </li>
+      <li>
+          <div>
+            3
+          </div>
+          <div>
+            <h4>Export your new file</h4>
+            <p>Get back a new gpx file with your modifications</p>
+          </div>
+        </li>
+    </ul>
+  
+  </section>
+  <footer>
+    <ul>
+      <li>
+        <h5>Open Source</h5>
+        <p>Find the source on <a href="GitHub">GitHub</a></p>
+      </li>
+      <li>
+        <h5>GPX specifications</h5>
+        <p>Contact me</p>
+      </li>
+      <li>
+        <h5>Suggestions</h5>
+        <p>Contact me on twitter : <a href="">@LuukaTr</a></p>
+      </li>
+    </ul>
+  
+    <p>MIT Licence - 2019 - Lucas Trebouet Voisin</p>
+  
+  </footer>

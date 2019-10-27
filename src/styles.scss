@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+}
+html, body {
+    background: #F3F4F5;
+}
+
+body {
+    background-image: url('/assets/images/background-map.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+html, body, ul, li {
+    margin: 0;
+    padding: 0;
+}
