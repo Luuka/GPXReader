@@ -1,8 +1,8 @@
 <section role="main">
     <h1>Track Reader</h1>
     <button class="restartsession">Restart your last session</button>
-    <div class="uploadfilecontainer" (click)="fileInput.click()" (dragover)="disablebehavior($event)" (dragleave)="disablebehavior($event)" appDragDrop (drop)="uploadFile($event)">
-      <p>Drop a gpx file here</p>  
+    <div class="uploadfilecontainer" (click)="fileInput.click()" (dragover)="ondragover($event)" (dragleave)="ondragleave($event)" appDragDrop (drop)="uploadFile($event)">
+      <p><i class="fas fa-file-import"></i>Drop a gpx file here</p>  
       <input hidden type="file" #fileInput (change)="uploadFileFromInput($event.target.files)">
     </div>
   

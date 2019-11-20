@@ -1,0 +1,16 @@
+nav {
+    background: #2ECC71;
+    width: 80vw;
+    height: 3rem;
+}
+
+#map {
+    height: calc(100% - 3rem);
+}
+
+.marker-pin {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 2rem;
+    border: solid .2rem white;
+}

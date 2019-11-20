@@ -1,0 +1,41 @@
+<section class="editorlist">
+    <ngx-simplebar>
+        <header (click)="toggleAccordion('tracks')">
+            <h3>Tracks</h3>
+            <i id="accordion-chevron--tracks" class="fas fa-chevron-up"></i>
+        </header>
+        <ul id="tracks" class="accordion accordion--open">
+            <ng-container *ngFor="let track of tracks.features; let idx = index" >
+                <li  *ngIf="track.geometry.type == 'LineString'">
+                    <label for="track-{{idx}}" class="track-label">
+                        <input type="checkbox" [attr.checked]="track.properties.visible ? 'checked' : null" id="track-{{idx}}" [attr.data-id]="idx" (change)="onCheckChange($event)">
+                        <span class="track-label--checkmark" [style.background-color]="track.properties.color" [style.border-color]="track.properties.color"><i class="fas fa-check"></i></span>
+                        <div class="track-label--text">
+                            <h3>{{ track.properties.name }}</h3>
+                            <p><span><i class="fas fa-route"></i>{{ track.properties.distance }}Km</span><span><i class="fas fa-long-arrow-alt-up"></i>{{ track.properties.elevation.positive }}m</span><span><i class="fas fa-long-arrow-alt-down"></i>{{ track.properties.elevation.negative }}m</span></p>
+                        </div>
+                    </label>
+                    <button class="track-more" (click)="editorService.startEdit(idx)"><i class="fas fa-ellipsis-v"></i></button>
+                </li>
+            </ng-container>
+        </ul>
+        <header (click)="toggleAccordion('waypoints')">
+            <h3>Waypoints</h3>
+            <i id="accordion-chevron--waypoints" class="fas fa-chevron-up"></i>
+        </header>
+        <ul id="waypoints" class="accordion accordion--open">
+            <ng-container *ngFor="let track of tracks.features; let idx = index" >
+                <li  *ngIf="track.geometry.type == 'Point'">
+                    <label for="track-{{idx}}" class="track-label">
+                        <input type="checkbox" [attr.checked]="track.properties.visible ? 'checked' : null" id="track-{{idx}}" [attr.data-id]="idx" (change)="onCheckChange($event)">
+                        <span class="track-label--checkmark" [style.background-color]="track.properties.color" [style.border-color]="track.properties.color"><i class="fas fa-check"></i></span>
+                        <div class="track-label--text">
+                            <h3>{{ track.properties.name }}</h3>
+                        </div>
+                    </label>
+                    <!-- <button class="track-more"><i class="fas fa-ellipsis-v"></i></button> -->
+                </li>
+            </ng-container>
+        </ul>
+    </ngx-simplebar>
+</section>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EditorService } from '../editor.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private editorService: EditorService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  ondragover(evt) {
+    evt.target.classList.add('uploadfilecontainer-dragover');
+    this.disablebehavior(evt);
+  }
+
+  ondragleave(evt) {
+    evt.target.classList.remove('uploadfilecontainer-dragover');
+    this.disablebehavior(evt);
   }
 
   disablebehavior(evt) {
@@ -21,11 +33,28 @@ export class HomeComponent implements OnInit {
     evt.preventDefault();
     evt.stopPropagation();
     let files = evt.dataTransfer.files
-    console.log(files);
+    
+    for(let file of files) {
+      this.readFile(file);
+    }
   }
 
-  uploadFileFromInput(evt) {
-    console.log(evt);
+  uploadFileFromInput(files) {
+    for(let file of files) {
+      this.readFile(file);
+    }
+  }
+
+  readFile(file) {
+    let keepThis = this;
+
+    let reader = new FileReader();
+    reader.onload = function(){
+      var text = reader.result;
+      keepThis.editorService.loadGpx(text);
+      keepThis.router.navigateByUrl('/editor');
+    };
+    reader.readAsText(file);
   }
 
 }

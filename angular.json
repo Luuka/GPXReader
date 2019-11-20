@@ -28,9 +28,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/leaflet/dist/leaflet.css",
+              "./node_modules/leaflet-draw/dist/leaflet.draw.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/gpx-parser.js"
+            ]
           },
           "configurations": {
             "production": {

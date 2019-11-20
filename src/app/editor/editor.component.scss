@@ -1,0 +1,25 @@
+header {
+    background: white;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #2ECC71;
+    font-family: 'Manrope Bold', sans-serif;
+
+    h1 {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.editor-main {
+    display: flex;
+    flex-direction: row;
+}
+
+.editor-map {
+    width: 80vw;
+    background: white;
+}

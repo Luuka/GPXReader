@@ -38,6 +38,11 @@ h1 {
     box-shadow: 0 0 0.2rem 0.1rem rgba(0,0,0,0.09);
 }
 
+.restartsession:hover {
+    cursor: pointer;
+}
+
+
 .uploadfilecontainer {
     height: 12rem;
     border: .2rem dashed rgba(112,112,112,0.31);
@@ -52,6 +57,19 @@ h1 {
     font-family: 'Manrope semibold', sans-serif;
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+.uploadfilecontainer i {
+    padding-right: .5rem;
+}
+
+.uploadfilecontainer:hover {
+    cursor: pointer;
+    border-color: #2ECC71;
+}
+
+.uploadfilecontainer-dragover {
+    border-color: #2ECC71;
 }
 
 section[role=main] ul, section[role=main] li {
