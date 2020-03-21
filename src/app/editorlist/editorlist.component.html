@@ -6,16 +6,24 @@
         </header>
         <ul id="tracks" class="accordion accordion--open">
             <ng-container *ngFor="let track of tracks.features; let idx = index" >
-                <li  *ngIf="track.geometry.type == 'LineString'">
+                <li class="item" *ngIf="track.geometry.type == 'LineString'">
+                  <section class="item-main">
                     <label for="track-{{idx}}" class="track-label">
-                        <input type="checkbox" [attr.checked]="track.properties.visible ? 'checked' : null" id="track-{{idx}}" [attr.data-id]="idx" (change)="onCheckChange($event)">
-                        <span class="track-label--checkmark" [style.background-color]="track.properties.color" [style.border-color]="track.properties.color"><i class="fas fa-check"></i></span>
-                        <div class="track-label--text">
-                            <h3>{{ track.properties.name }}</h3>
-                            <p><span><i class="fas fa-route"></i>{{ track.properties.distance }}Km</span><span><i class="fas fa-long-arrow-alt-up"></i>{{ track.properties.elevation.positive }}m</span><span><i class="fas fa-long-arrow-alt-down"></i>{{ track.properties.elevation.negative }}m</span></p>
-                        </div>
+                      <input type="checkbox" [attr.checked]="track.properties.visible ? 'checked' : null" id="track-{{idx}}" [attr.data-id]="idx" (change)="onCheckChange($event)">
+                      <span class="track-label--checkmark" [style.background-color]="track.properties.color" [style.border-color]="track.properties.color"><i class="fas fa-check"></i></span>
+                      <div class="track-label--text">
+                        <h3>{{ track.properties.name }}</h3>
+                        <p><span><i class="fas fa-route"></i>{{ track.properties.distance }}Km</span></p>
+                      </div>
                     </label>
-                    <button class="track-more" (click)="editorService.startEdit(idx)"><i class="fas fa-ellipsis-v"></i></button>
+                    <button class="track-more" (click)="toggleItemMenu(idx)"><i [className]="currentTrackItem == idx ? 'fas fa-minus' : 'fas fa-plus'"></i></button>
+                  </section>
+                  <section [className]="currentTrackItem == idx ? 'item-menu item-menu--active' : 'item-menu'">
+                    <button (click)="editorService.startEdit(idx)" title="Edit the track"><i class="fa fa-project-diagram"></i></button>
+                    <button title="Build elevation graph"><i class="fa fa-chart-area"></i></button>
+                    <button><i class="fa fa-edit" title="Edit metadata"></i></button>
+                    <button (click)="deleteElement(idx)"><i class="fa fa-trash" title="Delete the track"></i></button>
+                  </section>
                 </li>
             </ng-container>
         </ul>

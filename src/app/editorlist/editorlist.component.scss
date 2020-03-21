@@ -2,7 +2,7 @@
     background: white;
     width: 20vw;
     height: calc(100vh - 5rem);
-    
+
     header {
         background: #2ECC71;
         color: white;
@@ -34,8 +34,34 @@
 
 .editorlist li {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+  & > section{
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  & .item-menu {
+    display: none;
+    justify-content: flex-start;
+    background: rgb(230,255,230);
+    padding: .2rem;
+
+    &--active {
+      display: flex;
+    }
+
+    button {
+      background: white;
+      border: 2px solid #2ECC71;
+      width: 1.9rem;
+      height: 1.9rem;
+      border-radius: 1.9rem;
+      margin: 0 .2rem;
+    }
+  }
 }
 
 .track-label {

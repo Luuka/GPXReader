@@ -14,29 +14,42 @@ export class EditorlistComponent implements OnInit {
   private tracksObs: Subscription;
   private tracks = [];
 
+  private currentTrackItem = null;
+
   ngOnInit() {
-    let keepThis = this;
+    const editorComponent = this;
     this.tracksObs = this.editorService.tracksObs.subscribe(
       tracks => {
-        keepThis.tracks = tracks;
+        editorComponent.tracks = tracks;
       }
     );
-
   }
 
   onCheckChange(e) {
-    let idx = e.target.getAttribute('data-id');
+    const idx = e.target.getAttribute('data-id');
     (this.tracks as any).features[idx].properties.visible = e.target.checked;
     this.editorService.postTracks(this.tracks);
   }
 
-  toggleAccordion(id,e) {
-    let accordion = document.getElementById(id);
+  toggleAccordion(id, e) {
+    const accordion = document.getElementById(id);
     accordion.classList.toggle('accordion--open');
-    
-    let chevron = document.getElementById('accordion-chevron--'+id);
+
+    const chevron = document.getElementById('accordion-chevron--' + id);
     chevron.classList.toggle('fa-chevron-up');
     chevron.classList.toggle('fa-chevron-down');
+  }
+
+  toggleItemMenu(id) {
+    if (this.currentTrackItem !== id) {
+      this.currentTrackItem = id;
+    } else {
+      this.currentTrackItem = null;
+    }
+  }
+
+  deleteElement(idx) {
+    this.editorService.removeFeature(idx);
   }
 
   ngOnDestroy(){

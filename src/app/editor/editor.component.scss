@@ -5,8 +5,13 @@ header {
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #2ECC71;
+
     font-family: 'Manrope Bold', sans-serif;
+
+    a {
+      color: #2ECC71;
+      text-decoration: none;
+    }
 
     h1 {
         margin: 0;

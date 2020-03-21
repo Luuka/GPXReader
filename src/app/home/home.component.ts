@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditorService } from '../editor.service';
+import { StorageService } from '../storage.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private editorService: EditorService, private router: Router) { }
+  constructor(private editorService: EditorService, private storageService: StorageService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -32,9 +33,9 @@ export class HomeComponent implements OnInit {
   uploadFile(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    let files = evt.dataTransfer.files
-    
-    for(let file of files) {
+    const files = evt.dataTransfer.files;
+
+    for (const file of files) {
       this.readFile(file);
     }
   }
@@ -46,15 +47,19 @@ export class HomeComponent implements OnInit {
   }
 
   readFile(file) {
-    let keepThis = this;
+    const home = this;
 
-    let reader = new FileReader();
-    reader.onload = function(){
-      var text = reader.result;
-      keepThis.editorService.loadGpx(text);
-      keepThis.router.navigateByUrl('/editor');
+    const reader = new FileReader();
+    reader.onload = () => {
+      const text = reader.result;
+      home.editorService.loadGpx(text);
+      home.router.navigateByUrl('/editor');
     };
     reader.readAsText(file);
   }
 
+  loadSession() {
+    this.editorService.loadGEOJSON(this.storageService.getDataStored());
+    this.router.navigateByUrl('/editor');
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditorService } from '../editor.service';
+import { StorageService } from '../storage.service';
 import { from, Subscription } from 'rxjs';
 import {Router} from '@angular/router';
 
@@ -10,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class EditorComponent implements OnInit {
 
-  constructor(private editorService: EditorService, private router: Router) { }
+  constructor(private editorService: EditorService, private storageService: StorageService, private router: Router) { }
 
   private tracksObs: Subscription;
 
@@ -18,8 +19,15 @@ export class EditorComponent implements OnInit {
 
     this.tracksObs = this.editorService.tracksObs.subscribe(
       tracks => {
-        if(tracks.features.length == 0) {
-          this.router.navigateByUrl('/');
+        if (tracks.features.length === 0) {
+
+          if (this.storageService.isDataStored()) {
+            this.editorService.loadGEOJSON(this.storageService.getDataStored());
+          } else {
+            this.router.navigateByUrl('/');
+          }
+        } else {
+          this.storageService.updateStorage(tracks);
         }
       }
     );
