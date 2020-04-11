@@ -16,3 +16,17 @@ html, body, ul, li {
     margin: 0;
     padding: 0;
 }
+
+.btn {
+    border-radius: .2rem;
+    padding: .5rem;
+    line-height: .5rem;
+    height: 1.5rem;
+    margin: 0 .5rem;
+}
+
+.btn-green {
+    background: #2ECC71;
+    color: white;
+    border: .1rem solid white;
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as togeojson from '@mapbox/togeojson';
 import { from, Subject, BehaviorSubject } from 'rxjs';
+import { saveAs } from 'file-saver';
 declare const gpxParser: any;
 
 @Injectable({
@@ -126,5 +127,67 @@ export class EditorService {
     storedGeoJSON.features.splice(idx,1);
 
     this.tracks.next(storedGeoJSON);
+  }
+
+  exportToGPX() {
+    const storedGeoJSON: any = this.tracks.value;
+
+    let gpx = document.createElement('gpx');
+    gpx.setAttribute("version", "1.1");
+    gpx.setAttribute("creator", "GPXReader");
+
+    storedGeoJSON.features.forEach((feature) => {
+
+      if (feature.geometry.type == "Point") {
+        let wpt = document.createElement('wpt');
+
+        let name = document.createElement('name');
+        name.innerHTML = feature.properties.name;
+        wpt.appendChild(name);
+
+        const point = feature.geometry.coordinates;
+        wpt.setAttribute('lon', point[0]);
+        wpt.setAttribute('lat', point[1]);
+
+        let ele = document.createElement('ele');
+        ele.innerHTML = point[2];
+        
+        wpt.appendChild(ele);
+        gpx.appendChild(wpt);
+      }
+
+      if (feature.geometry.type == "LineString") {
+        let track = document.createElement('trk');
+
+        let name = document.createElement('name');
+        name.innerHTML = feature.properties.name;
+        track.appendChild(name);
+
+        let trkSeg = document.createElement('trkseg');
+
+        feature.geometry.coordinates.forEach(point => {
+          let trkpt = document.createElement('trkpt');
+          trkpt.setAttribute('lon', point[0]);
+          trkpt.setAttribute('lat', point[1]);
+
+          let ele = document.createElement('ele');
+          ele.innerHTML = point[2];
+
+          trkpt.appendChild(ele);
+          trkSeg.appendChild(trkpt);
+        });
+
+        track.appendChild(trkSeg);
+        gpx.appendChild(track);
+      }
+    });
+
+    let xmlHeader = '<?xml version="1.0" encoding="UTF-8" ?>\n';
+    let content = xmlHeader + gpx.outerHTML;
+    let blob = new Blob([content], {
+      type: "text/plain;charset=utf-8"
+    });
+
+    saveAs(blob, "GPXReader-export.gpx");
   }
 }
