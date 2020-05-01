@@ -11,7 +11,11 @@ import {Router} from '@angular/router';
 })
 export class EditorComponent implements OnInit {
 
-  constructor(private editorService: EditorService, private storageService: StorageService, private router: Router) { }
+  constructor(
+    private editorService: EditorService,
+    private storageService: StorageService,
+    private router: Router
+  ) { }
 
   private tracksObs: Subscription;
 

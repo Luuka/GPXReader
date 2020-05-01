@@ -1,0 +1,35 @@
+.modal-content {
+    $modal-width: 80vw;
+    $modal-height: 80vh;
+
+    position: absolute;
+    left: calc(50vw - 40vw);
+    top: calc(50vh - 40vh);
+    height: $modal-height;
+    width: $modal-width;
+    background: white;
+    z-index: 9999;
+
+    border: .2rem solid #2ECC71;
+}
+
+.modal-overlay { 
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,0.7);
+    z-index: 9998;
+}
+
+.modal-close {
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    right: -1rem;
+    top: -1rem;
+    background: white;
+    border: .2rem solid #2ECC71;
+    border-radius: 2rem;
+}

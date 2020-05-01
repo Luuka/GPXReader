@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EditorService } from '../editor.service';
 import { from, Subscription } from 'rxjs';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-editorlist',
@@ -9,12 +10,15 @@ import { from, Subscription } from 'rxjs';
 })
 export class EditorlistComponent implements OnInit {
 
-  constructor(private editorService: EditorService) { }
+  constructor(private editorService: EditorService, private modalService: ModalService) { }
 
   private tracksObs: Subscription;
   private tracks = [];
 
   private currentTrackItem = null;
+
+  private currentEditTrack = null;
+  private currentEditTrackIdx = null;
 
   ngOnInit() {
     const editorComponent = this;
@@ -50,6 +54,21 @@ export class EditorlistComponent implements OnInit {
 
   deleteElement(idx) {
     this.editorService.removeFeature(idx);
+  }
+
+  startEditTrack(idx) {
+    this.currentEditTrackIdx = idx;
+    this.currentEditTrack = this.tracks.features[idx];
+    this.modalService.get('modal-test').toggleVisible();
+  }
+
+  saveEditTrack() {
+    this.tracks.features[this.currentEditTrackIdx] = this.currentEditTrack;
+    this.editorService.postTracks(this.tracks);
+
+    this.modalService.get('modal-test').toggleVisible();
+    this.currentEditTrack = null;
+    this.currentEditTrackIdx = null;
   }
 
   ngOnDestroy(){

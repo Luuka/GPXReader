@@ -21,7 +21,7 @@
                   <section [className]="currentTrackItem == idx ? 'item-menu item-menu--active' : 'item-menu'">
                     <button (click)="editorService.startEdit(idx)" title="Edit the track"><i class="fa fa-project-diagram"></i></button>
                     <button title="Build elevation graph"><i class="fa fa-chart-area"></i></button>
-                    <button><i class="fa fa-edit" title="Edit metadata"></i></button>
+                    <button (click)="startEditTrack(idx)"><i class="fa fa-edit" title="Edit metadata"></i></button>
                     <button (click)="deleteElement(idx)"><i class="fa fa-trash" title="Delete the track"></i></button>
                   </section>
                 </li>
@@ -47,3 +47,17 @@
         </ul>
     </ngx-simplebar>
 </section>
+
+<app-modal class="modal" modal-name="modal-test">
+    <div modal-content>
+        <ng-container *ngIf="currentEditTrack != null">
+            <form (submit)="saveEditTrack()">
+                <label for="name">Name</label>
+                <input type="text" [ngClass]="{'form-error' : currentEditTrack.properties.name.length <= 0}" minlength="1" id="name" name="name" [(ngModel)]="currentEditTrack.properties.name">
+            
+                <br>
+                <input type="submit">
+            </form>            
+        </ng-container>
+    </div>
+</app-modal>
